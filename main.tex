@@ -85,11 +85,98 @@ dx=d(x),\qquad dy=d(y)
 \]
 であるから、\(dx\wedge dy\) も \(\Z^2\)-不変である。
 
+\subsection{\(T^2\) 上の形式と \(\R^2\) 上の周期形式}
+
+\begin{prop}[商写像は被覆写像]
+\(\pi:\R^2\to T^2\) は滑らかな被覆写像である。とくに \(\pi\) は全射であり、
+各点 \(p\in \R^2\) において微分
+\[
+d\pi_p:T_p\R^2\to T_{\pi(p)}T^2
+\]
+は線形同型である。
+\end{prop}
+
+\begin{proof}[略証]
+\(\R^2/\Z^2\) の各点は、\(\R^2\) の小さい開矩形の像で局所的に記述でき、
+その上で \(\pi\) は微分同相になる。したがって \(\pi\) は被覆写像であり、
+とくに局所微分同相である。
+\end{proof}
+
+\begin{prop}[pullback の単射性]
+各 \(k\ge 0\) に対して
+\[
+\pi^*:\Omega^k(T^2)\to \Omega^k(\R^2)
+\]
+は単射である。
+\end{prop}
+
+\begin{proof}
+\(\eta\in\Omega^k(T^2)\) が \(\pi^*\eta=0\) を満たすとする。
+任意の \(q\in T^2\) をとり、\(\pi(p)=q\) となる \(p\in\R^2\) をとる。
+\(\pi\) は局所微分同相なので
+\[
+d\pi_p:T_p\R^2\to T_qT^2
+\]
+は同型である。したがって、任意の \(v_1,\dots,v_k\in T_qT^2\) に対し
+\(d\pi_p(w_i)=v_i\) を満たす \(w_i\in T_p\R^2\) をとれる。
+
+pullback の定義より
+\[
+(\pi^*\eta)_p(w_1,\dots,w_k)
+=
+\eta_q(d\pi_p(w_1),\dots,d\pi_p(w_k))
+=
+\eta_q(v_1,\dots,v_k).
+\]
+左辺は仮定より \(0\) なので
+\[
+\eta_q(v_1,\dots,v_k)=0.
+\]
+\(q\) と \(v_i\) は任意だったから \(\eta=0\) である。
+\end{proof}
+
+\begin{prop}[\(\Z^2\)-不変形式との対応]
+\(\pi^*\) は \(T^2\) 上の微分形式と、\(\R^2\) 上の \(\Z^2\)-不変微分形式との間の
+全単射を与える。すなわち
+\[
+\Omega^k(T^2)
+\cong
+\{\omega\in \Omega^k(\R^2)\mid \tau_{m,n}^*\omega=\omega\ \ (\forall (m,n)\in\Z^2)\}.
+\]
+\end{prop}
+
+\begin{proof}
+まず \(\eta\in\Omega^k(T^2)\) に対して
+\[
+\tau_{m,n}^*(\pi^*\eta)
+=
+(\pi\circ\tau_{m,n})^*\eta
+=
+\pi^*\eta
+\]
+である。したがって \(\pi^*\eta\) は \(\Z^2\)-不変である。
+
+逆に \(\omega\in\Omega^k(\R^2)\) が \(\Z^2\)-不変であるとする。
+各 \(q\in T^2\) と \(p\in\pi^{-1}(q)\) に対して
+\[
+\eta_q(v_1,\dots,v_k)
+:=
+\omega_p(w_1,\dots,w_k)
+\]
+と定める。ただし \(w_i\in T_p\R^2\) は
+\[
+d\pi_p(w_i)=v_i
+\]
+を満たすものとする。\(d\pi_p\) は同型なので \(w_i\) は一意に定まり、
+さらに \(\omega\) の \(\Z^2\)-不変性により \(p\) の取り方にも依らない。
+こうして \(\eta\in\Omega^k(T^2)\) が定まり、\(\pi^*\eta=\omega\) を満たす。
+単射性は前命題より従う。
+\end{proof}
+
 \section{\(T^2\) 上の形式 \(\alpha,\beta,\mu\)}
 
-
-% todo \pi^*がZ^2周期のR^2上の形式とT^2上の形式の同型を与えていることを明示的に書いた方が良い
-上の不変性により、\(dx,dy,dx\wedge dy\) は \(T^2\) 上の形式に降りる。
+前節の命題より、\(\Z^2\)-不変な形式 \(dx,dy,dx\wedge dy\) は
+\(T^2\) 上の形式に一意に降りる。
 それらを
 \[
 \alpha,\beta\in \Omega^1(T^2),\qquad \mu\in \Omega^2(T^2)
@@ -840,7 +927,7 @@ g(x+m,y+n)=g(x,y)
 \section*{付録：本稿で用いた被覆空間に関する事実}
 
 この節では、\(T^2=\R^2/\Z^2\) の de Rham コホモロジーの計算で用いた
-被覆空間に関する基本事実をまとめる。
+被覆空間に関する補足事項をまとめる。
 
 \subsection*{基本設定}
 
@@ -854,92 +941,6 @@ g(x+m,y+n)=g(x,y)
 \qquad ((m,n)\in\Z^2)
 \]
 によって \(\R^2\) に作用する。
-
-\begin{prop}[商写像は被覆写像]
-\(\pi:\R^2\to T^2\) は滑らかな被覆写像である。とくに \(\pi\) は全射であり、
-各点 \(p\in \R^2\) において微分
-\[
-d\pi_p:T_p\R^2\to T_{\pi(p)}T^2
-\]
-は線形同型である。
-\end{prop}
-
-\begin{proof}[略証]
-\(\R^2/\Z^2\) の各点は、\(\R^2\) の小さい開矩形の像で局所的に記述でき、
-その上で \(\pi\) は微分同相になる。したがって \(\pi\) は被覆写像であり、
-とくに局所微分同相である。
-\end{proof}
-
-\begin{prop}[pullback の単射性]
-各 \(k\ge 0\) に対して
-\[
-\pi^*:\Omega^k(T^2)\to \Omega^k(\R^2)
-\]
-は単射である。
-\end{prop}
-
-\begin{proof}
-\(\eta\in\Omega^k(T^2)\) が \(\pi^*\eta=0\) を満たすとする。
-任意の \(q\in T^2\) をとり、\(\pi(p)=q\) となる \(p\in\R^2\) をとる。
-\(\pi\) は局所微分同相なので
-\[
-d\pi_p:T_p\R^2\to T_qT^2
-\]
-は同型である。したがって、任意の \(v_1,\dots,v_k\in T_qT^2\) に対し
-\(d\pi_p(w_i)=v_i\) を満たす \(w_i\in T_p\R^2\) をとれる。
-
-pullback の定義より
-\[
-(\pi^*\eta)_p(w_1,\dots,w_k)
-=
-\eta_q(d\pi_p(w_1),\dots,d\pi_p(w_k))
-=
-\eta_q(v_1,\dots,v_k).
-\]
-左辺は仮定より \(0\) なので
-\[
-\eta_q(v_1,\dots,v_k)=0.
-\]
-\(q\) と \(v_i\) は任意だったから \(\eta=0\) である。
-\end{proof}
-
-\begin{prop}[\(\Z^2\)-不変形式との対応]
-\(\pi^*\) は \(T^2\) 上の微分形式と、\(\R^2\) 上の \(\Z^2\)-不変微分形式との間の
-全単射を与える。すなわち
-\[
-\Omega^k(T^2)
-\cong
-\{\omega\in \Omega^k(\R^2)\mid \tau_{m,n}^*\omega=\omega\ \ (\forall (m,n)\in\Z^2)\}.
-\]
-\end{prop}
-
-\begin{proof}
-まず \(\eta\in\Omega^k(T^2)\) に対して
-\[
-\tau_{m,n}^*(\pi^*\eta)
-=
-(\pi\circ\tau_{m,n})^*\eta
-=
-\pi^*\eta
-\]
-である。したがって \(\pi^*\eta\) は \(\Z^2\)-不変である。
-
-逆に \(\omega\in\Omega^k(\R^2)\) が \(\Z^2\)-不変であるとする。
-各 \(q\in T^2\) と \(p\in\pi^{-1}(q)\) に対して
-\[
-\eta_q(v_1,\dots,v_k)
-:=
-\omega_p(w_1,\dots,w_k)
-\]
-と定める。ただし \(w_i\in T_p\R^2\) は
-\[
-d\pi_p(w_i)=v_i
-\]
-を満たすものとする。\(d\pi_p\) は同型なので \(w_i\) は一意に定まり、
-さらに \(\omega\) の \(\Z^2\)-不変性により \(p\) の取り方にも依らない。
-こうして \(\eta\in\Omega^k(T^2)\) が定まり、\(\pi^*\eta=\omega\) を満たす。
-単射性は前命題より従う。
-\end{proof}
 
 \begin{prop}[path lifting]
 \(\gamma:[0,1]\to T^2\) を連続 path とし、\(p_0\in\R^2\) が
