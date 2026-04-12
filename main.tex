@@ -793,6 +793,70 @@ H^*_{\mathrm{dR}}(T^2)\cong \Lambda_{\R}([\alpha],[\beta])
 \]
 と書ける。すなわち次数 $1$ の2つの生成元 \([\alpha],[\beta]\) を持つ外積代数である。
 
+\section*{補論：縮められる loop に沿う閉 \(1\)-形式の積分}
+
+\begin{prop}
+\(\omega\in\Omega^1(T^2)\) を閉 \(1\)-形式とし、
+\(\gamma:S^1\to T^2\) を loop とする。
+
+さらに \(\gamma\) が縮められる、すなわち
+ある滑らかな写像
+\[
+F:D^2\to T^2
+\]
+が存在して、その境界で
+\[
+F|_{\partial D^2}=\gamma
+\]
+となるとする。このとき
+\[
+\int_\gamma \omega=0
+\]
+が成り立つ。
+\end{prop}
+
+\begin{proof}
+Stokes の定理より
+\[
+\int_\gamma \omega
+=
+\int_{\partial D^2}F^*\omega
+=
+\int_{D^2} d(F^*\omega)
+\]
+である。
+
+pullback と外微分は可換だから
+\[
+d(F^*\omega)=F^*(d\omega)
+\]
+が成り立つ。しかも \(\omega\) は閉形式なので
+\[
+d\omega=0
+\]
+である。したがって
+\[
+\int_{D^2} d(F^*\omega)
+=
+\int_{D^2} F^*(d\omega)
+=
+\int_{D^2} F^*(0)
+=
+0.
+\]
+よって
+\[
+\int_\gamma \omega=0
+\]
+を得る。
+\end{proof}
+
+\begin{remark}
+この命題はトーラスに特有のものではなく、任意の滑らかな多様体で成り立つ。
+本稿で言う「穴に引っかかっていない loop」とは、この命題の仮定のように
+\(D^2\) で張れる loop のことである。
+\end{remark}
+
 \section*{補足：\(g\) の周期性の別証明}
 
 \begin{remark}
