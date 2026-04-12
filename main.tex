@@ -1,0 +1,1064 @@
+\documentclass[uplatex,dvipdfmx,11pt]{jsarticle}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=25mm]{geometry}
+
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\Z}{\mathbf{Z}}
+
+\theoremstyle{definition}
+\newtheorem{prop}{命題}
+\newtheorem{remark}{注意}
+
+\title{$T^2=\R^2/\Z^2$ の de Rham コホモロジー\\
+--- 記号の省略をしない版 ---}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{目的}
+
+トーラス
+\[
+T^2=\R^2/\Z^2
+\]
+の de Rham コホモロジーを、被覆空間 \(\R^2\) 上の周期形式を用いて計算する。
+
+ここでは記号の混乱を避けるため、
+\begin{itemize}
+  \item \(\R^2\) 上の標準座標に付随する $1$-形式を \(dx,dy\) と書く。
+  \item それらが \(T^2\) に降りてできる $1$-形式を \(\alpha,\beta\) と書く。
+  \item \(dx\wedge dy\) が \(T^2\) に降りてできる $2$-形式を \(\mu\) と書く。
+\end{itemize}
+
+最終的に
+\[
+H^0_{\mathrm{dR}}(T^2)\cong \R,\qquad
+H^1_{\mathrm{dR}}(T^2)\cong \R^2,\qquad
+H^2_{\mathrm{dR}}(T^2)\cong \R
+\]
+を示し、基底を
+\[
+[1],\qquad [\alpha],[\beta],\qquad [\mu]
+\]
+と記述する。
+
+\section{基本設定}
+
+商写像を
+\[
+\pi:\R^2\to T^2,\qquad \pi(x,y)=[(x,y)]
+\]
+とする。
+
+\(\R^2\) 上の標準座標関数
+\[
+x:\R^2\to\R,\qquad (x,y)\mapsto x,
+\]
+\[
+y:\R^2\to\R,\qquad (x,y)\mapsto y
+\]
+に対応する $1$-形式を
+\[
+dx=d(x),\qquad dy=d(y)
+\]
+と書く。
+
+各 \((m,n)\in\Z^2\) に対し、整数平行移動
+\[
+\tau_{m,n}:\R^2\to\R^2,\qquad \tau_{m,n}(x,y)=(x+m,y+n)
+\]
+を考えると、
+\[
+\tau_{m,n}^*(dx)=d(x\circ \tau_{m,n})=d(x+m)=dx,
+\]
+\[
+\tau_{m,n}^*(dy)=d(y\circ \tau_{m,n})=d(y+n)=dy
+\]
+である。したがって \(dx,dy\) は \(\Z^2\)-不変である。
+
+また
+\[
+\tau_{m,n}^*(dx\wedge dy)=\tau_{m,n}^*(dx)\wedge \tau_{m,n}^*(dy)=dx\wedge dy
+\]
+であるから、\(dx\wedge dy\) も \(\Z^2\)-不変である。
+
+\section{\(T^2\) 上の形式 \(\alpha,\beta,\mu\)}
+
+
+% todo \pi^*がZ^2周期のR^2上の形式とT^2上の形式の同型を与えていることを明示的に書いた方が良い
+上の不変性により、\(dx,dy,dx\wedge dy\) は \(T^2\) 上の形式に降りる。
+それらを
+\[
+\alpha,\beta\in \Omega^1(T^2),\qquad \mu\in \Omega^2(T^2)
+\]
+と書く。すなわち
+\[
+\pi^*\alpha=dx,\qquad \pi^*\beta=dy,\qquad \pi^*\mu=dx\wedge dy
+\tag{1}
+\]
+を満たすものとして定める。
+
+\begin{remark}
+ふつうの本では \(\alpha,\beta,\mu\) も単に \(dx,dy,dx\wedge dy\) と書くことが多いが、
+本稿ではこの省略をしない。
+\end{remark}
+
+\section{\(H^0_{\mathrm{dR}}(T^2)\) の計算}
+
+\begin{prop}
+\[
+H^0_{\mathrm{dR}}(T^2)\cong \R.
+\]
+\end{prop}
+
+\begin{proof}
+\(f\in \Omega^0(T^2)\) が閉であるとは \(df=0\) であることをいう。
+このとき
+\[
+d(\pi^*f)=\pi^*(df)=0
+\]
+であるから、\(\pi^*f\) は \(\R^2\) 上局所定数である。
+\(\R^2\) は連結なので、\(\pi^*f\) は定数関数である。
+したがって \(f\) も定数関数である。
+
+ゆえに
+\[
+H^0_{\mathrm{dR}}(T^2)\cong \R.
+\]
+\end{proof}
+
+\section{\(H^1_{\mathrm{dR}}(T^2)\) の計算}
+
+\subsection{2本の基本ループ}
+
+\(T^2\) 上の path
+\[
+\gamma_x:[0,1]\to T^2,\qquad \gamma_x(t)=\pi(t,0),
+\]
+\[
+\gamma_y:[0,1]\to T^2,\qquad \gamma_y(t)=\pi(0,t)
+\]
+を考える。これらは \(T^2\) 上では loop である。
+
+それぞれの lift を
+\[
+\widetilde{\gamma}_x:[0,1]\to \R^2,\qquad \widetilde{\gamma}_x(t)=(t,0),
+\]
+\[
+\widetilde{\gamma}_y:[0,1]\to \R^2,\qquad \widetilde{\gamma}_y(t)=(0,t)
+\]
+とする。すると
+\[
+\pi\circ \widetilde{\gamma}_x=\gamma_x,\qquad
+\pi\circ \widetilde{\gamma}_y=\gamma_y.
+\tag{2}
+\]
+
+\subsection{\(\alpha,\beta\) の基本ループに沿う積分}
+
+\begin{prop}
+\[
+\int_{\gamma_x}\alpha=1,\qquad \int_{\gamma_x}\beta=0,
+\]
+\[
+\int_{\gamma_y}\alpha=0,\qquad \int_{\gamma_y}\beta=1.
+\]
+\end{prop}
+
+\begin{proof}
+pullback の合成則 \((f\circ g)^*=g^*\circ f^*\) と \((1),(2)\) から
+\[
+\gamma_x^*\alpha=(\pi\circ \widetilde{\gamma}_x)^*\alpha
+=\widetilde{\gamma}_x^{\,*}(\pi^*\alpha)
+=\widetilde{\gamma}_x^{\,*}(dx),
+\]
+\[
+\gamma_x^*\beta=(\pi\circ \widetilde{\gamma}_x)^*\beta
+=\widetilde{\gamma}_x^{\,*}(\pi^*\beta)
+=\widetilde{\gamma}_x^{\,*}(dy).
+\]
+さらに
+\[
+x\circ \widetilde{\gamma}_x(t)=t,\qquad y\circ \widetilde{\gamma}_x(t)=0
+\]
+より
+\[
+\widetilde{\gamma}_x^{\,*}(dx)=d(x\circ \widetilde{\gamma}_x)=d(t)=dt,
+\]
+\[
+\widetilde{\gamma}_x^{\,*}(dy)=d(y\circ \widetilde{\gamma}_x)=d(0)=0.
+\]
+したがって
+\[
+\int_{\gamma_x}\alpha=\int_0^1 \gamma_x^*\alpha=\int_0^1 dt=1,
+\]
+\[
+\int_{\gamma_x}\beta=\int_0^1 \gamma_x^*\beta=\int_0^1 0=0.
+\]
+
+同様に
+\[
+\gamma_y^*\alpha=(\pi\circ \widetilde{\gamma}_y)^*\alpha
+=\widetilde{\gamma}_y^{\,*}(\pi^*\alpha)
+=\widetilde{\gamma}_y^{\,*}(dx),
+\]
+\[
+\gamma_y^*\beta=(\pi\circ \widetilde{\gamma}_y)^*\beta
+=\widetilde{\gamma}_y^{\,*}(\pi^*\beta)
+=\widetilde{\gamma}_y^{\,*}(dy).
+\]
+ここで
+\[
+x\circ \widetilde{\gamma}_y(t)=0,\qquad y\circ \widetilde{\gamma}_y(t)=t
+\]
+だから
+\[
+\widetilde{\gamma}_y^{\,*}(dx)=d(0)=0,\qquad
+\widetilde{\gamma}_y^{\,*}(dy)=d(t)=dt.
+\]
+ゆえに
+\[
+\int_{\gamma_y}\alpha=\int_0^1 0=0,\qquad
+\int_{\gamma_y}\beta=\int_0^1 dt=1.
+\]
+\end{proof}
+
+\subsection{周期写像}
+
+閉 $1$-形式 \(\omega\in\Omega^1(T^2)\) に対して
+\[
+\Phi([\omega])
+=
+\left(
+\int_{\gamma_x}\omega,\,
+\int_{\gamma_y}\omega
+\right)\in \R^2
+\]
+と定める。
+
+\(\omega=df\) が exact なら、任意の閉曲線 \(\gamma\) に対して
+\[
+\int_\gamma \omega=\int_\gamma df=0
+\]
+であるから、\(\Phi\) は well-defined であり、
+\[
+\Phi:H^1_{\mathrm{dR}}(T^2)\to \R^2
+\]
+という線形写像を与える。
+
+\subsection{\(\Phi\) の全射性}
+
+\begin{prop}
+\(\Phi\) は全射である。
+\end{prop}
+
+\begin{proof}
+前節の計算より
+\[
+\Phi([\alpha])=(1,0),\qquad \Phi([\beta])=(0,1).
+\]
+したがって \(\Phi\) は全射である。
+\end{proof}
+
+% 方針 R^2は可縮より任意の閉形式はexactである。\omegaを\piで引き戻してR^2における形式にすると外微分と引き戻しの可換性から\pi^*\omegaは閉形式である。よって\pi^*\omegaはexactである。つまりdg=\pi^*\omegaなるgが存在する。このgはZ^2周期を持つことが示せる。よって\pi^*f=gなるfが存在する。このfについて\omega=dfが成り立つことが示せる。
+
+% todo 積分写像\Phiの単射性を示す際にKer\Phi={0}を証明する方針をとる(つまりKernelにはexactな形式しかいないことを示す)が、formがKer\Phiに属していること(つまり積分して0)は、R^2側でgがZ^2周期的であることを示すことのみに用いられている。これはどういうことか説明できるようにする。
+% ↑デッキ変換を使うとg\circ\tau_{m,n}−gが定数になることがわかる。積分して0という仮定からこの定数が0であることが示せる。
+
+
+\subsection{\(\Phi\) の単射性}
+
+\begin{prop}
+\(\Phi\) は単射である。
+\end{prop}
+
+\begin{proof}
+\(\Phi([\omega])=(0,0)\) と仮定する。
+\(\omega\in\Omega^1(T^2)\) は閉であるとする。
+
+\(\pi^*\omega\in \Omega^1(\R^2)\) は \(\Z^2\)-不変な $1$-形式であり、
+ある滑らかな周期関数 \(A,B\in C^\infty(\R^2)\) を用いて
+\[
+\pi^*\omega=A(x,y)\,dx+B(x,y)\,dy
+\tag{3}
+\]
+と書ける。
+
+\(\omega\) が閉であるから
+\[
+0=\pi^*(d\omega)=d(\pi^*\omega).
+\]
+よって \((3)\) を微分して
+\[
+\frac{\partial A}{\partial y}=\frac{\partial B}{\partial x}
+\tag{4}
+\]
+を得る。
+
+\medskip
+
+\(\R^2\) は可縮であるから、Poincar\'e の補題より \(\pi^*\omega\) は exact である。
+したがって、ある \(g\in C^\infty(\R^2)\) が存在して
+\[
+dg=\pi^*\omega
+\tag{5}
+\]
+を満たす。
+
+以下では \(g\) が \(\Z^2\)-周期的であることを示す。
+
+\medskip
+
+まず
+\[
+I(y):=\int_0^1 A(x,y)\,dx
+\]
+とおく。
+すると \((4)\) より
+\[
+I'(y)
+=
+\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dx
+=
+\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dx
+=
+B(1,y)-B(0,y)=0
+\]
+である。最後は \(B\) の \(1\)-periodicity を用いた。
+したがって \(I(y)\) は定数である。
+
+一方、
+\[
+\int_{\gamma_x}\omega=0
+\]
+と仮定しているので、\((2)\) と \((3)\) を用いて
+\[
+0=\int_{\gamma_x}\omega
+=\int_0^1 \gamma_x^*\omega
+=\int_0^1 \widetilde{\gamma}_x^{\,*}(\pi^*\omega)
+=\int_0^1 \widetilde{\gamma}_x^{\,*}(A\,dx+B\,dy).
+\]
+ここで \(\widetilde{\gamma}_x(t)=(t,0)\) であるから
+\[
+\widetilde{\gamma}_x^{\,*}(A\,dx+B\,dy)=A(t,0)\,dt.
+\]
+よって
+\[
+0=\int_0^1 A(t,0)\,dt=I(0).
+\]
+\(I(y)\) は定数なので
+\[
+I(y)=0\qquad (\forall y).
+\tag{6}
+\]
+
+次に \((5)\) より
+\[
+\frac{\partial g}{\partial x}=A.
+\]
+したがって
+\[
+g(x+1,y)-g(x,y)
+=
+\int_x^{x+1}\frac{\partial g}{\partial x}(s,y)\,ds
+=
+\int_x^{x+1}A(s,y)\,ds.
+\]
+\(A\) は \(1\)-periodic なので
+\[
+\int_x^{x+1}A(s,y)\,ds=\int_0^1A(s,y)\,ds=I(y)=0.
+\]
+ゆえに
+\[
+g(x+1,y)=g(x,y).
+\tag{7}
+\]
+
+\medskip
+
+同様に
+\[
+J(x):=\int_0^1 B(x,y)\,dy
+\]
+とおくと
+\[
+J'(x)
+=
+\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dy
+=
+\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dy
+=
+A(x,1)-A(x,0)=0
+\]
+より \(J(x)\) は定数である。
+
+また \(\int_{\gamma_y}\omega=0\) だから
+\[
+0=\int_{\gamma_y}\omega
+=\int_0^1 \gamma_y^*\omega
+=\int_0^1 \widetilde{\gamma}_y^{\,*}(\pi^*\omega)
+=\int_0^1 \widetilde{\gamma}_y^{\,*}(A\,dx+B\,dy).
+\]
+ここで \(\widetilde{\gamma}_y(t)=(0,t)\) だから
+\[
+\widetilde{\gamma}_y^{\,*}(A\,dx+B\,dy)=B(0,t)\,dt.
+\]
+よって
+\[
+0=\int_0^1 B(0,t)\,dt=J(0),
+\]
+したがって
+\[
+J(x)=0\qquad (\forall x).
+\tag{8}
+\]
+
+さらに \((5)\) より
+\[
+\frac{\partial g}{\partial y}=B.
+\]
+したがって
+\[
+g(x,y+1)-g(x,y)
+=
+\int_y^{y+1}\frac{\partial g}{\partial y}(x,t)\,dt
+=
+\int_y^{y+1}B(x,t)\,dt
+=
+\int_0^1B(x,t)\,dt
+=
+J(x)=0.
+\]
+ゆえに
+\[
+g(x,y+1)=g(x,y).
+\tag{9}
+\]
+
+\medskip
+
+\((7),(9)\) より \(g\) は \(\Z^2\)-周期的である。
+したがって、ある \(f\in C^\infty(T^2)\) が存在して
+\[
+\pi^*f=g
+\]
+を満たす。
+
+すると
+\[
+\pi^*(df)=d(\pi^*f)=dg=\pi^*\omega.
+\]
+\(\pi^*\) の単射性より
+\[
+df=\omega.
+\]
+よって \(\omega\) は exact である。
+
+したがって \(\ker\Phi=0\) であり、\(\Phi\) は単射である。
+\end{proof}
+
+\subsection{\(H^1\) の結論}
+
+\begin{prop}
+\[
+H^1_{\mathrm{dR}}(T^2)\cong \R^2.
+\]
+しかも \([\alpha],[\beta]\) はその基底である。
+\end{prop}
+
+\begin{proof}
+前節までで \(\Phi:H^1_{\mathrm{dR}}(T^2)\to\R^2\) が線形同型であることを示した。
+また
+\[
+\Phi([\alpha])=(1,0),\qquad \Phi([\beta])=(0,1)
+\]
+であるから、\([\alpha],[\beta]\) は基底を与える。
+\end{proof}
+
+\begin{remark}
+この計算は、閉 $1$-形式 \(\omega\) のコホモロジー類が
+\[
+\int_{\gamma_x}\omega,\qquad \int_{\gamma_y}\omega
+\]
+という2つの周期で完全に決まることを示している。
+したがって \(H^1(T^2)\) は、横方向・縦方向という2つの独立な「回り方」を記録する空間だと理解できる。
+\end{remark}
+
+\section{\(H^2_{\mathrm{dR}}(T^2)\) の計算}
+
+\subsection{積分写像}
+
+閉 $2$-形式 \(\sigma\in \Omega^2(T^2)\) に対して
+\[
+I([\sigma])=\int_{T^2}\sigma
+\]
+と定める。
+
+\(\sigma=d\lambda\) が exact なら、Stokes の定理より
+\[
+\int_{T^2}\sigma=\int_{T^2}d\lambda=\int_{\partial T^2}\lambda=0
+\]
+である。したがって
+\[
+I:H^2_{\mathrm{dR}}(T^2)\to \R
+\]
+は well-defined な線形写像である。
+
+\subsection{\(I\) の全射性}
+
+\begin{prop}
+\(I\) は全射である。
+\end{prop}
+
+\begin{proof}
+\((1)\) より \(\pi^*\mu=dx\wedge dy\) である。
+したがって
+\[
+\int_{T^2}\mu=\int_{[0,1]^2} dx\,dy=1.
+\]
+ゆえに
+\[
+I([\mu])=1
+\]
+であり、\(I\) は全射である。
+\end{proof}
+
+\subsection{\(I\) の単射性}
+
+\begin{prop}
+\(I\) は単射である。
+\end{prop}
+
+\begin{proof}
+\(I([\sigma])=0\) と仮定する。
+\(\sigma\in \Omega^2(T^2)\) は閉 $2$-形式であるが、\(T^2\) は $2$ 次元多様体なので、
+任意の $2$-形式は自動的に閉である。
+
+\(\pi^*\sigma\in \Omega^2(\R^2)\) は \(\Z^2\)-不変な $2$-形式であり、
+ある周期関数 \(h\in C^\infty(\R^2)\) を用いて
+\[
+\pi^*\sigma=h(x,y)\,dx\wedge dy
+\tag{10}
+\]
+と書ける。
+
+仮定 \(I([\sigma])=0\) は
+\[
+\int_{T^2}\sigma=0
+\]
+であるから、
+\[
+0=\int_{T^2}\sigma=\int_{[0,1]^2} h(x,y)\,dx\,dy
+\tag{11}
+\]
+となる。
+
+まず
+\[
+\phi(y):=\int_0^1 h(s,y)\,ds
+\]
+とおく。すると \(\phi\) は \(1\)-periodic であり、
+\[
+\int_0^1 \phi(y)\,dy
+=
+\int_0^1\int_0^1 h(s,y)\,ds\,dy
+=0
+\tag{12}
+\]
+が成り立つ。
+
+次に
+\[
+u(x,y):=\int_0^x h(s,y)\,ds - x\,\phi(y)
+\]
+とおくと
+\[
+\frac{\partial u}{\partial x}(x,y)=h(x,y)-\phi(y).
+\tag{13}
+\]
+また \(h,\phi\) の周期性から \(u\) は \(x,y\) の両方について \(1\)-periodic である。
+
+さらに
+\[
+v(y):=\int_0^y \phi(t)\,dt
+\]
+とおくと
+\[
+v'(y)=\phi(y)
+\tag{14}
+\]
+であり、\((12)\) から \(v\) も \(1\)-periodic である。
+
+ここで \(\R^2\) 上の $1$-形式
+\[
+\widetilde{\lambda}:=-v(y)\,dx+u(x,y)\,dy
+\]
+を考える。係数 \(u,v\) は周期的であるから、\(\widetilde{\lambda}\) は \(\Z^2\)-不変である。
+したがって、ある \(\lambda\in \Omega^1(T^2)\) が存在して
+\[
+\pi^*\lambda=\widetilde{\lambda}
+\tag{15}
+\]
+を満たす。
+
+\((15)\) を微分すると
+\[
+\pi^*(d\lambda)=d(\pi^*\lambda)=d\widetilde{\lambda}.
+\]
+しかも
+\[
+d\widetilde{\lambda}
+=
+d(-v(y)\,dx)+d(u(x,y)\,dy)
+\]
+\[
+=
+-v'(y)\,dy\wedge dx+\frac{\partial u}{\partial x}(x,y)\,dx\wedge dy
+\]
+\[
+=
+\left(v'(y)+\frac{\partial u}{\partial x}(x,y)\right)\,dx\wedge dy.
+\]
+ここに \((13),(14)\) を代入すると
+\[
+d\widetilde{\lambda}
+=
+\left(\phi(y)+h(x,y)-\phi(y)\right)\,dx\wedge dy
+=
+h(x,y)\,dx\wedge dy.
+\]
+\((10)\) より
+\[
+d\widetilde{\lambda}=\pi^*\sigma.
+\]
+したがって
+\[
+\pi^*(d\lambda)=\pi^*\sigma.
+\]
+\(\pi^*\) の単射性より
+\[
+d\lambda=\sigma.
+\]
+よって \(\sigma\) は exact である。
+
+したがって \(\ker I=0\) であり、\(I\) は単射である。
+\end{proof}
+
+\subsection{\(H^2\) の結論}
+
+\begin{prop}
+\[
+H^2_{\mathrm{dR}}(T^2)\cong \R.
+\]
+しかも \([\mu]\) はその基底である。
+\end{prop}
+
+\begin{proof}
+前節までで \(I:H^2_{\mathrm{dR}}(T^2)\to\R\) が線形同型であることを示した。
+また
+\[
+I([\mu])=1
+\]
+であるから、\([\mu]\) は基底を与える。
+\end{proof}
+
+\begin{remark}
+\(H^2(T^2)\) は、トーラス全体という閉じた $2$ 次元の面に対する総量
+\[
+\int_{T^2}\sigma
+\]
+で決まる。したがって、ここで検出されているのは「真ん中の穴」ではなく、
+閉じた $2$ 次元多様体全体そのものである。
+\end{remark}
+
+\section{まとめ}
+
+以上より
+\[
+H^0_{\mathrm{dR}}(T^2)\cong \R,\qquad
+H^1_{\mathrm{dR}}(T^2)\cong \R^2,\qquad
+H^2_{\mathrm{dR}}(T^2)\cong \R,
+\]
+また \(\dim T^2=2\) なので
+\[
+H^k_{\mathrm{dR}}(T^2)=0\qquad (k\ge 3)
+\]
+である。
+
+基底は
+\[
+H^0:\ [1],\qquad
+H^1:\ [\alpha],[\beta],\qquad
+H^2:\ [\mu]
+\]
+で与えられる。ここで \(\alpha,\beta,\mu\) は
+\[
+\pi^*\alpha=dx,\qquad \pi^*\beta=dy,\qquad \pi^*\mu=dx\wedge dy
+\]
+を満たす \(T^2\) 上の形式である。
+
+したがってコホモロジー環は
+\[
+H^*_{\mathrm{dR}}(T^2)\cong \Lambda_{\R}([\alpha],[\beta])
+\]
+と書ける。すなわち次数 $1$ の2つの生成元 \([\alpha],[\beta]\) を持つ外積代数である。
+
+\section*{補足：\(g\) の周期性の別証明}
+
+\begin{remark}
+\(H^1_{\mathrm{dR}}(T^2)\) の計算において、\(\Phi\) の単射性を示す際、
+\[
+dg=\pi^*\omega
+\]
+を満たす \(g\in C^\infty(\R^2)\) の \(\Z^2\)-周期性は、座標計算の代わりに
+整数平行移動
+\[
+\tau_{m,n}:\R^2\to\R^2,\qquad \tau_{m,n}(x,y)=(x+m,y+n)
+\qquad ((m,n)\in \Z^2)
+\]
+を用いて、より概念的に示すこともできる。
+
+\medskip
+
+実際、\(\pi\circ \tau_{m,n}=\pi\) であるから
+\[
+d(g\circ \tau_{m,n}-g)
+=
+\tau_{m,n}^*(dg)-dg
+=
+\tau_{m,n}^*(\pi^*\omega)-\pi^*\omega
+=
+(\pi\circ \tau_{m,n})^*\omega-\pi^*\omega
+=
+\pi^*\omega-\pi^*\omega
+=
+0.
+\]
+したがって \(\R^2\) の連結性より
+\[
+g\circ \tau_{m,n}-g
+\]
+は定数関数である。これを \(c_{m,n}\in \R\) と書く。すなわち
+\[
+g(x+m,y+n)-g(x,y)=c_{m,n}
+\qquad ((m,n)\in \Z^2).
+\tag{A}
+\]
+
+\medskip
+
+とくに \((m,n)=(1,0)\), \((0,1)\) の場合、\((A)\) の左辺は定数なので、
+\((x,y)=(0,0)\) を代入して
+\[
+c_{1,0}=g(1,0)-g(0,0),\qquad c_{0,1}=g(0,1)-g(0,0)
+\]
+を得る。
+
+ここで
+\[
+\widetilde{\gamma}_x(t)=(t,0),\qquad
+\widetilde{\gamma}_y(t)=(0,t)
+\qquad (0\le t\le 1)
+\]
+とすると、
+\[
+\pi\circ \widetilde{\gamma}_x=\gamma_x,\qquad
+\pi\circ \widetilde{\gamma}_y=\gamma_y
+\]
+であるから
+\[
+c_{1,0}
+=
+g(1,0)-g(0,0)
+=
+\int_{\widetilde{\gamma}_x} dg
+=
+\int_{\widetilde{\gamma}_x} \pi^*\omega
+=
+\int_{\gamma_x}\omega,
+\]
+\[
+c_{0,1}
+=
+g(0,1)-g(0,0)
+=
+\int_{\widetilde{\gamma}_y} dg
+=
+\int_{\widetilde{\gamma}_y} \pi^*\omega
+=
+\int_{\gamma_y}\omega.
+\]
+したがって、\(\Phi([\omega])=(0,0)\) の仮定
+\[
+\int_{\gamma_x}\omega=0,\qquad \int_{\gamma_y}\omega=0
+\]
+から
+\[
+c_{1,0}=0,\qquad c_{0,1}=0
+\]
+が従う。
+
+\medskip
+
+さらに \((A)\) から \(c_{m,n}\) は加法的である。実際、
+\[
+c_{m+m',\,n+n'}
+=
+g(x+m+m',y+n+n')-g(x,y)
+\]
+\[
+=
+\bigl(g(x+m+m',y+n+n')-g(x+m',y+n')\bigr)
++
+\bigl(g(x+m',y+n')-g(x,y)\bigr)
+=
+c_{m,n}+c_{m',n'}
+\]
+である。よって
+\[
+c_{m,n}=m\,c_{1,0}+n\,c_{0,1}=0
+\qquad ((m,n)\in \Z^2).
+\]
+したがって
+\[
+g(x+m,y+n)=g(x,y)
+\qquad ((m,n)\in \Z^2)
+\]
+が成り立ち、\(g\) は \(\Z^2\)-周期的である。
+
+ゆえに \(g\) は \(T^2\) 上の関数に降り、\(\omega\) が exact であることが従う。
+
+\medskip
+
+この議論は、\(g\) の周期性が「deck transformation によるずれは定数であり、その定数は
+閉 \(1\)-形式 \(\omega\) の period に等しい」という事実から従うことを示している。
+\end{remark}
+
+\section*{付録：本稿で用いた被覆空間に関する事実}
+
+この節では、\(T^2=\R^2/\Z^2\) の de Rham コホモロジーの計算で用いた
+被覆空間に関する基本事実をまとめる。
+
+\subsection*{基本設定}
+
+商写像を
+\[
+\pi:\R^2\to T^2=\R^2/\Z^2,\qquad \pi(x,y)=[(x,y)]
+\]
+とする。ここで \(\Z^2\) は整数平行移動
+\[
+\tau_{m,n}:\R^2\to\R^2,\qquad \tau_{m,n}(x,y)=(x+m,y+n)
+\qquad ((m,n)\in\Z^2)
+\]
+によって \(\R^2\) に作用する。
+
+\begin{prop}[商写像は被覆写像]
+\(\pi:\R^2\to T^2\) は滑らかな被覆写像である。とくに \(\pi\) は全射であり、
+各点 \(p\in \R^2\) において微分
+\[
+d\pi_p:T_p\R^2\to T_{\pi(p)}T^2
+\]
+は線形同型である。
+\end{prop}
+
+\begin{proof}[略証]
+\(\R^2/\Z^2\) の各点は、\(\R^2\) の小さい開矩形の像で局所的に記述でき、
+その上で \(\pi\) は微分同相になる。したがって \(\pi\) は被覆写像であり、
+とくに局所微分同相である。
+\end{proof}
+
+\begin{prop}[pullback の単射性]
+各 \(k\ge 0\) に対して
+\[
+\pi^*:\Omega^k(T^2)\to \Omega^k(\R^2)
+\]
+は単射である。
+\end{prop}
+
+\begin{proof}
+\(\eta\in\Omega^k(T^2)\) が \(\pi^*\eta=0\) を満たすとする。
+任意の \(q\in T^2\) をとり、\(\pi(p)=q\) となる \(p\in\R^2\) をとる。
+\(\pi\) は局所微分同相なので
+\[
+d\pi_p:T_p\R^2\to T_qT^2
+\]
+は同型である。したがって、任意の \(v_1,\dots,v_k\in T_qT^2\) に対し
+\(d\pi_p(w_i)=v_i\) を満たす \(w_i\in T_p\R^2\) をとれる。
+
+pullback の定義より
+\[
+(\pi^*\eta)_p(w_1,\dots,w_k)
+=
+\eta_q(d\pi_p(w_1),\dots,d\pi_p(w_k))
+=
+\eta_q(v_1,\dots,v_k).
+\]
+左辺は仮定より \(0\) なので
+\[
+\eta_q(v_1,\dots,v_k)=0.
+\]
+\(q\) と \(v_i\) は任意だったから \(\eta=0\) である。
+\end{proof}
+
+\begin{prop}[\(\Z^2\)-不変形式との対応]
+\(\pi^*\) は \(T^2\) 上の微分形式と、\(\R^2\) 上の \(\Z^2\)-不変微分形式との間の
+全単射を与える。すなわち
+\[
+\Omega^k(T^2)
+\cong
+\{\omega\in \Omega^k(\R^2)\mid \tau_{m,n}^*\omega=\omega\ \ (\forall (m,n)\in\Z^2)\}.
+\]
+\end{prop}
+
+\begin{proof}
+まず \(\eta\in\Omega^k(T^2)\) に対して
+\[
+\tau_{m,n}^*(\pi^*\eta)
+=
+(\pi\circ\tau_{m,n})^*\eta
+=
+\pi^*\eta
+\]
+である。したがって \(\pi^*\eta\) は \(\Z^2\)-不変である。
+
+逆に \(\omega\in\Omega^k(\R^2)\) が \(\Z^2\)-不変であるとする。
+各 \(q\in T^2\) と \(p\in\pi^{-1}(q)\) に対して
+\[
+\eta_q(v_1,\dots,v_k)
+:=
+\omega_p(w_1,\dots,w_k)
+\]
+と定める。ただし \(w_i\in T_p\R^2\) は
+\[
+d\pi_p(w_i)=v_i
+\]
+を満たすものとする。\(d\pi_p\) は同型なので \(w_i\) は一意に定まり、
+さらに \(\omega\) の \(\Z^2\)-不変性により \(p\) の取り方にも依らない。
+こうして \(\eta\in\Omega^k(T^2)\) が定まり、\(\pi^*\eta=\omega\) を満たす。
+単射性は前命題より従う。
+\end{proof}
+
+\begin{prop}[path lifting]
+\(\gamma:[0,1]\to T^2\) を連続 path とし、\(p_0\in\R^2\) が
+\[
+\pi(p_0)=\gamma(0)
+\]
+を満たすとする。このとき、\(\gamma\) を始点 \(p_0\) から持ち上げる lift
+\[
+\widetilde{\gamma}:[0,1]\to\R^2
+\]
+で
+\[
+\pi\circ\widetilde{\gamma}=\gamma,\qquad \widetilde{\gamma}(0)=p_0
+\]
+を満たすものがただ一つ存在する。
+\end{prop}
+
+\begin{remark}
+本稿で用いた
+\[
+\gamma_x(t)=\pi(t,0),\qquad \gamma_y(t)=\pi(0,t)
+\]
+の lift
+\[
+\widetilde{\gamma}_x(t)=(t,0),\qquad \widetilde{\gamma}_y(t)=(0,t)
+\]
+はこの一般事実の具体例である。
+\end{remark}
+
+\begin{prop}[lift を用いた pullback の計算]
+\(\eta\in\Omega^k(T^2)\)、\(\gamma:[0,1]\to T^2\) を path、
+\(\widetilde{\gamma}:[0,1]\to\R^2\) をその lift とする。このとき
+\[
+\gamma=\pi\circ\widetilde{\gamma}
+\]
+であるから
+\[
+\gamma^*\eta
+=
+(\pi\circ\widetilde{\gamma})^*\eta
+=
+\widetilde{\gamma}^{\,*}(\pi^*\eta)
+\]
+が成り立つ。
+\end{prop}
+
+\begin{proof}
+pullback の合成則
+\[
+(f\circ g)^*=g^*\circ f^*
+\]
+を用いればよい。
+\end{proof}
+
+\begin{remark}
+したがって \(T^2\) 上の形式の path に沿う積分は、\(\R^2\) 上の lift に沿う積分に直して計算できる。
+本稿で
+\[
+\int_{\gamma_x}\alpha,\quad \int_{\gamma_x}\beta,\quad
+\int_{\gamma_y}\alpha,\quad \int_{\gamma_y}\beta
+\]
+を計算したのはこの事実による。
+\end{remark}
+
+\begin{prop}[deck transformation]
+各整数平行移動
+\[
+\tau_{m,n}(x,y)=(x+m,y+n)
+\qquad ((m,n)\in\Z^2)
+\]
+は \(\pi\) の deck transformation である。すなわち
+\[
+\pi\circ\tau_{m,n}=\pi
+\]
+が成り立つ。さらに \(\pi\) の deck transformation はすべてこの形で与えられる。
+\end{prop}
+
+\begin{remark}
+とくに、ある path \(\gamma\) の lift \(\widetilde{\gamma}\) が一つ与えられると、
+他の任意の lift は
+\[
+\tau_{m,n}\circ \widetilde{\gamma}
+\qquad ((m,n)\in\Z^2)
+\]
+の形に書ける。
+\end{remark}
+
+\begin{prop}[deck transformation と原始関数のずれ]
+\(\omega\in\Omega^1(T^2)\) を閉 \(1\)-形式とし、
+\[
+dg=\pi^*\omega
+\]
+を満たす \(g\in C^\infty(\R^2)\) をとる。このとき任意の \((m,n)\in\Z^2\) に対して
+\[
+g\circ\tau_{m,n}-g
+\]
+は定数関数である。
+\end{prop}
+
+\begin{proof}
+\[
+d(g\circ\tau_{m,n}-g)
+=
+\tau_{m,n}^*(dg)-dg
+=
+\tau_{m,n}^*(\pi^*\omega)-\pi^*\omega
+=
+(\pi\circ\tau_{m,n})^*\omega-\pi^*\omega
+=
+0.
+\]
+\(\R^2\) は連結だから、\(g\circ\tau_{m,n}-g\) は定数である。
+\end{proof}
+
+\begin{remark}
+この定数は \(\omega\) の period と解釈できる。
+したがって、基本ループに沿う period がすべて \(0\) なら、
+\(g\) は \(\Z^2\)-不変、すなわち \(T^2\) 上の関数に降りる。
+これは \(H^1_{\mathrm{dR}}(T^2)\) の計算における \(\Phi\) の単射性の別証明を与える。
+\end{remark}
+
+\end{document}
