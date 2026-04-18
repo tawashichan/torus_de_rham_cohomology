@@ -40,7 +40,15 @@ jobs:
           mkdir -p _site
           cp "${PDF_FILE}" _site/
           touch _site/.nojekyll
-          cat > _site/index.html <<'EOF'
+          GENERATED_AT_UTC="$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          GENERATED_AT_JST="$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S JST')"
+          SHORT_SHA="${GITHUB_SHA::7}"
+          cat > _site/generated-at.txt <<EOF
+          generated_at_utc=${GENERATED_AT_UTC}
+          generated_at_jst=${GENERATED_AT_JST}
+          commit=${GITHUB_SHA}
+          EOF
+          cat > _site/index.html <<EOF
           <!doctype html>
           <html lang="en">
             <head>
@@ -74,6 +82,16 @@ jobs:
                   font-size: 20px;
                   line-height: 1.3;
                 }
+                p {
+                  margin: 6px 0 0;
+                  color: #59636e;
+                  font-size: 14px;
+                  line-height: 1.45;
+                }
+                code {
+                  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+                  font-size: 13px;
+                }
                 a {
                   color: #0969da;
                 }
@@ -88,7 +106,11 @@ jobs:
             <body>
               <main>
                 <header>
-                  <h1>Torus de Rham Cohomology</h1>
+                  <div>
+                    <h1>Torus de Rham Cohomology</h1>
+                    <p>PDF generated: ${GENERATED_AT_JST} (${GENERATED_AT_UTC})</p>
+                    <p>Commit: <code>${SHORT_SHA}</code></p>
+                  </div>
                   <a href="main.pdf">Open PDF</a>
                 </header>
                 <iframe src="main.pdf" title="PDF preview"></iframe>
