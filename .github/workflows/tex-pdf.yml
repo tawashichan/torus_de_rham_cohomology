@@ -33,3 +33,91 @@ jobs:
           name: main-pdf
           path: ${{ env.PDF_FILE }}
           if-no-files-found: error
+
+      - name: Prepare GitHub Pages site
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          mkdir -p _site
+          cp "${PDF_FILE}" _site/
+          touch _site/.nojekyll
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <title>Torus de Rham Cohomology</title>
+              <style>
+                body {
+                  margin: 0;
+                  font-family: system-ui, sans-serif;
+                  background: #f6f7f9;
+                  color: #1f2328;
+                }
+                main {
+                  box-sizing: border-box;
+                  min-height: 100vh;
+                  padding: 24px;
+                  display: grid;
+                  gap: 16px;
+                  grid-template-rows: auto 1fr;
+                }
+                header {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 16px;
+                  flex-wrap: wrap;
+                }
+                h1 {
+                  margin: 0;
+                  font-size: 20px;
+                  line-height: 1.3;
+                }
+                a {
+                  color: #0969da;
+                }
+                iframe {
+                  width: 100%;
+                  height: calc(100vh - 104px);
+                  border: 1px solid #d0d7de;
+                  background: white;
+                }
+              </style>
+            </head>
+            <body>
+              <main>
+                <header>
+                  <h1>Torus de Rham Cohomology</h1>
+                  <a href="main.pdf">Open PDF</a>
+                </header>
+                <iframe src="main.pdf" title="PDF preview"></iframe>
+              </main>
+            </body>
+          </html>
+          EOF
+
+      - name: Upload GitHub Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy-pages:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build-pdf
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
