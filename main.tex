@@ -365,8 +365,9 @@ dg=\pi^*\omega
 \medskip
 
 実際、\(\Phi([\omega])=(0,0)\) という仮定は、まさにこの周期性を示すために使われる。
-以下の証明ではこれを座標計算で示し、後の補足ではデッキ変換を用いた
-より概念的な説明を与える。
+以下の証明では、被覆空間の deck transformation を用いて
+\(g\) のずれが period と一致することを示す。
+座標計算による証明は付録に回す。
 \end{remark}
 
 
@@ -380,170 +381,109 @@ dg=\pi^*\omega
 \(\Phi([\omega])=(0,0)\) と仮定する。
 \(\omega\in\Omega^1(T^2)\) は閉であるとする。
 
-\(\pi^*\omega\in \Omega^1(\R^2)\) は \(\Z^2\)-不変な $1$-形式であり、
-ある滑らかな周期関数 \(A,B\in C^\infty(\R^2)\) を用いて
-\[
-\pi^*\omega=A(x,y)\,dx+B(x,y)\,dy
-\tag{3}
-\]
-と書ける。
-
-\(\omega\) が閉であるから
-\[
-0=\pi^*(d\omega)=d(\pi^*\omega).
-\]
-よって \((3)\) を微分して
-\[
-\frac{\partial A}{\partial y}=\frac{\partial B}{\partial x}
-\tag{4}
-\]
-を得る。
-
-\medskip
-
+\(\omega\) は閉なので \(\pi^*\omega\) も閉である。
 \(\R^2\) は可縮であるから、Poincar\'e の補題より \(\pi^*\omega\) は exact である。
 したがって、ある \(g\in C^\infty(\R^2)\) が存在して
 \[
 dg=\pi^*\omega
-\tag{5}
 \]
 を満たす。
 
-したがって、あとは \(g\) が \(\Z^2\)-周期的であることを示せばよい。
-ここで \(\Phi([\omega])=(0,0)\) という仮定は、その周期性を示すためにのみ用いる。
+各 \((m,n)\in\Z^2\) に対して
+\[
+\tau_{m,n}(x,y)=(x+m,y+n)
+\]
+とおく。これは \(\pi\) の deck transformation なので
+\(\pi\circ\tau_{m,n}=\pi\) である。したがって
+\[
+d(g\circ\tau_{m,n}-g)
+=
+\tau_{m,n}^*(dg)-dg
+=
+\tau_{m,n}^*(\pi^*\omega)-\pi^*\omega
+=
+(\pi\circ\tau_{m,n})^*\omega-\pi^*\omega
+=
+0.
+\]
+\(\R^2\) は連結なので、\(g\circ\tau_{m,n}-g\) は定数関数である。
+この定数を \(c_{m,n}\in\R\) と書く。すなわち
+\[
+g(x+m,y+n)-g(x,y)=c_{m,n}
+\qquad ((m,n)\in\Z^2)
+\]
+である。
 
 \medskip
 
-まず
+まず \((m,n)=(1,0)\) の場合を考える。上の左辺は定数だから
+\((x,y)=(0,0)\) を代入して
 \[
-I(y):=\int_0^1 A(x,y)\,dx
+c_{1,0}=g(1,0)-g(0,0)
 \]
-とおく。
-すると \((4)\) より
+を得る。一方、\(\widetilde{\gamma}_x(t)=(t,0)\) だから
 \[
-I'(y)
+c_{1,0}
 =
-\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dx
+g(1,0)-g(0,0)
 =
-\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dx
+\int_{\widetilde{\gamma}_x} dg
 =
-B(1,y)-B(0,y)=0
+\int_{\widetilde{\gamma}_x}\pi^*\omega
+=
+\int_{\gamma_x}\omega.
 \]
-である。最後は \(B\) の \(1\)-periodicity を用いた。
-したがって \(I(y)\) は定数である。
+\(\Phi([\omega])=(0,0)\) より \(\int_{\gamma_x}\omega=0\) なので
+\[
+c_{1,0}=0.
+\]
 
-一方、
+同様に、\(\widetilde{\gamma}_y(t)=(0,t)\) を用いると
 \[
-\int_{\gamma_x}\omega=0
+c_{0,1}
+=
+g(0,1)-g(0,0)
+=
+\int_{\widetilde{\gamma}_y} dg
+=
+\int_{\widetilde{\gamma}_y}\pi^*\omega
+=
+\int_{\gamma_y}\omega
+=0.
 \]
-と仮定しているので、\((2)\) と \((3)\) を用いて
+
+\medskip
+
+さらに、定数 \(c_{m,n}\) は \((m,n)\) に関して加法的である。実際、
+\(\tau_{m+m',\,n+n'}=\tau_{m,n}\circ\tau_{m',n'}\) なので
 \[
-0=\int_{\gamma_x}\omega
-=\int_0^1 \gamma_x^*\omega
-=\int_0^1 \widetilde{\gamma}_x^{\,*}(\pi^*\omega)
-=\int_0^1 \widetilde{\gamma}_x^{\,*}(A\,dx+B\,dy).
+g\circ\tau_{m+m',\,n+n'}-g
+=
+(g\circ\tau_{m,n}-g)\circ\tau_{m',n'}
++
+(g\circ\tau_{m',n'}-g).
 \]
-ここで \(\widetilde{\gamma}_x(t)=(t,0)\) であるから
+右辺は定数関数 \(c_{m,n}+c_{m',n'}\) だから
 \[
-\widetilde{\gamma}_x^{\,*}(A\,dx+B\,dy)=A(t,0)\,dt.
+c_{m+m',\,n+n'}
+=
+c_{m,n}+c_{m',n'}.
+\]
+したがって
+\[
+c_{m,n}=m\,c_{1,0}+n\,c_{0,1}=0
+\qquad ((m,n)\in\Z^2).
 \]
 よって
 \[
-0=\int_0^1 A(t,0)\,dt=I(0).
+g(x+m,y+n)=g(x,y)
+\qquad ((m,n)\in\Z^2)
 \]
-\(I(y)\) は定数なので
-\[
-I(y)=0\qquad (\forall y).
-\tag{6}
-\]
-
-次に \((5)\) より
-\[
-\frac{\partial g}{\partial x}=A.
-\]
-したがって
-\[
-g(x+1,y)-g(x,y)
-=
-\int_x^{x+1}\frac{\partial g}{\partial x}(s,y)\,ds
-=
-\int_x^{x+1}A(s,y)\,ds.
-\]
-\(A\) は \(1\)-periodic なので
-\[
-\int_x^{x+1}A(s,y)\,ds=\int_0^1A(s,y)\,ds=I(y)=0.
-\]
-ゆえに
-\[
-g(x+1,y)=g(x,y).
-\tag{7}
-\]
+であり、\(g\) は \(\Z^2\)-不変である。
 
 \medskip
 
-同様に
-\[
-J(x):=\int_0^1 B(x,y)\,dy
-\]
-とおくと
-\[
-J'(x)
-=
-\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dy
-=
-\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dy
-=
-A(x,1)-A(x,0)=0
-\]
-より \(J(x)\) は定数である。
-
-また \(\int_{\gamma_y}\omega=0\) だから
-\[
-0=\int_{\gamma_y}\omega
-=\int_0^1 \gamma_y^*\omega
-=\int_0^1 \widetilde{\gamma}_y^{\,*}(\pi^*\omega)
-=\int_0^1 \widetilde{\gamma}_y^{\,*}(A\,dx+B\,dy).
-\]
-ここで \(\widetilde{\gamma}_y(t)=(0,t)\) だから
-\[
-\widetilde{\gamma}_y^{\,*}(A\,dx+B\,dy)=B(0,t)\,dt.
-\]
-よって
-\[
-0=\int_0^1 B(0,t)\,dt=J(0),
-\]
-したがって
-\[
-J(x)=0\qquad (\forall x).
-\tag{8}
-\]
-
-さらに \((5)\) より
-\[
-\frac{\partial g}{\partial y}=B.
-\]
-したがって
-\[
-g(x,y+1)-g(x,y)
-=
-\int_y^{y+1}\frac{\partial g}{\partial y}(x,t)\,dt
-=
-\int_y^{y+1}B(x,t)\,dt
-=
-\int_0^1B(x,t)\,dt
-=
-J(x)=0.
-\]
-ゆえに
-\[
-g(x,y+1)=g(x,y).
-\tag{9}
-\]
-
-\medskip
-
-\((7),(9)\) より \(g\) は \(\Z^2\)-周期的である。
-したがって、ある \(f\in C^\infty(T^2)\) が存在して
+\(0\) 次の場合の不変関数との対応より、ある \(f\in C^\infty(T^2)\) が存在して
 \[
 \pi^*f=g
 \]
@@ -643,7 +583,7 @@ I([\mu])=1
 ある周期関数 \(h\in C^\infty(\R^2)\) を用いて
 \[
 \pi^*\sigma=h(x,y)\,dx\wedge dy
-\tag{10}
+\tag{3}
 \]
 と書ける。
 
@@ -654,7 +594,7 @@ I([\mu])=1
 であるから、
 \[
 0=\int_{T^2}\sigma=\int_{[0,1]^2} h(x,y)\,dx\,dy
-\tag{11}
+\tag{4}
 \]
 となる。
 
@@ -668,7 +608,7 @@ I([\mu])=1
 =
 \int_0^1\int_0^1 h(s,y)\,ds\,dy
 =0
-\tag{12}
+\tag{5}
 \]
 が成り立つ。
 
@@ -679,7 +619,7 @@ u(x,y):=\int_0^x h(s,y)\,ds - x\,\phi(y)
 とおくと
 \[
 \frac{\partial u}{\partial x}(x,y)=h(x,y)-\phi(y).
-\tag{13}
+\tag{6}
 \]
 また \(h,\phi\) の周期性から \(u\) は \(x,y\) の両方について \(1\)-periodic である。
 
@@ -690,9 +630,9 @@ v(y):=\int_0^y \phi(t)\,dt
 とおくと
 \[
 v'(y)=\phi(y)
-\tag{14}
+\tag{7}
 \]
-であり、\((12)\) から \(v\) も \(1\)-periodic である。
+であり、\((5)\) から \(v\) も \(1\)-periodic である。
 
 ここで \(\R^2\) 上の $1$-形式
 \[
@@ -702,11 +642,11 @@ v'(y)=\phi(y)
 したがって、ある \(\lambda\in \Omega^1(T^2)\) が存在して
 \[
 \pi^*\lambda=\widetilde{\lambda}
-\tag{15}
+\tag{8}
 \]
 を満たす。
 
-\((15)\) を微分すると
+\((8)\) を微分すると
 \[
 \pi^*(d\lambda)=d(\pi^*\lambda)=d\widetilde{\lambda}.
 \]
@@ -724,7 +664,7 @@ d(-v(y)\,dx)+d(u(x,y)\,dy)
 =
 \left(v'(y)+\frac{\partial u}{\partial x}(x,y)\right)\,dx\wedge dy.
 \]
-ここに \((13),(14)\) を代入すると
+ここに \((6),(7)\) を代入すると
 \[
 d\widetilde{\lambda}
 =
@@ -732,7 +672,7 @@ d\widetilde{\lambda}
 =
 h(x,y)\,dx\wedge dy.
 \]
-\((10)\) より
+\((3)\) より
 \[
 d\widetilde{\lambda}=\pi^*\sigma.
 \]
@@ -872,137 +812,6 @@ d\omega=0
 \(D^2\) で張れる loop のことである。
 \end{remark}
 
-\section*{補足：\(g\) の周期性の別証明}
-
-\begin{remark}
-\(H^1_{\mathrm{dR}}(T^2)\) の計算において、\(\Phi\) の単射性を示す際、
-\[
-dg=\pi^*\omega
-\]
-を満たす \(g\in C^\infty(\R^2)\) の \(\Z^2\)-周期性は、座標計算の代わりに
-整数平行移動
-\[
-\tau_{m,n}:\R^2\to\R^2,\qquad \tau_{m,n}(x,y)=(x+m,y+n)
-\qquad ((m,n)\in \Z^2)
-\]
-を用いて、より概念的に示すこともできる。
-
-\medskip
-
-実際、\(\pi\circ \tau_{m,n}=\pi\) であるから
-\[
-d(g\circ \tau_{m,n}-g)
-=
-\tau_{m,n}^*(dg)-dg
-=
-\tau_{m,n}^*(\pi^*\omega)-\pi^*\omega
-=
-(\pi\circ \tau_{m,n})^*\omega-\pi^*\omega
-=
-\pi^*\omega-\pi^*\omega
-=
-0.
-\]
-したがって \(\R^2\) の連結性より
-\[
-g\circ \tau_{m,n}-g
-\]
-は定数関数である。これを \(c_{m,n}\in \R\) と書く。すなわち
-\[
-g(x+m,y+n)-g(x,y)=c_{m,n}
-\qquad ((m,n)\in \Z^2).
-\tag{A}
-\]
-
-\medskip
-
-とくに \((m,n)=(1,0)\), \((0,1)\) の場合、\((A)\) の左辺は定数なので、
-\((x,y)=(0,0)\) を代入して
-\[
-c_{1,0}=g(1,0)-g(0,0),\qquad c_{0,1}=g(0,1)-g(0,0)
-\]
-を得る。
-
-ここで
-\[
-\widetilde{\gamma}_x(t)=(t,0),\qquad
-\widetilde{\gamma}_y(t)=(0,t)
-\qquad (0\le t\le 1)
-\]
-とすると、
-\[
-\pi\circ \widetilde{\gamma}_x=\gamma_x,\qquad
-\pi\circ \widetilde{\gamma}_y=\gamma_y
-\]
-であるから
-\[
-c_{1,0}
-=
-g(1,0)-g(0,0)
-=
-\int_{\widetilde{\gamma}_x} dg
-=
-\int_{\widetilde{\gamma}_x} \pi^*\omega
-=
-\int_{\gamma_x}\omega,
-\]
-\[
-c_{0,1}
-=
-g(0,1)-g(0,0)
-=
-\int_{\widetilde{\gamma}_y} dg
-=
-\int_{\widetilde{\gamma}_y} \pi^*\omega
-=
-\int_{\gamma_y}\omega.
-\]
-したがって、\(\Phi([\omega])=(0,0)\) の仮定
-\[
-\int_{\gamma_x}\omega=0,\qquad \int_{\gamma_y}\omega=0
-\]
-から
-\[
-c_{1,0}=0,\qquad c_{0,1}=0
-\]
-が従う。
-
-\medskip
-
-さらに \((A)\) から \(c_{m,n}\) は加法的である。実際、
-\[
-c_{m+m',\,n+n'}
-=
-g(x+m+m',y+n+n')-g(x,y)
-\]
-\[
-=
-\bigl(g(x+m+m',y+n+n')-g(x+m',y+n')\bigr)
-+
-\bigl(g(x+m',y+n')-g(x,y)\bigr)
-=
-c_{m,n}+c_{m',n'}
-\]
-である。よって
-\[
-c_{m,n}=m\,c_{1,0}+n\,c_{0,1}=0
-\qquad ((m,n)\in \Z^2).
-\]
-したがって
-\[
-g(x+m,y+n)=g(x,y)
-\qquad ((m,n)\in \Z^2)
-\]
-が成り立ち、\(g\) は \(\Z^2\)-周期的である。
-
-ゆえに \(g\) は \(T^2\) 上の関数に降り、\(\omega\) が exact であることが従う。
-
-\medskip
-
-この議論は、\(g\) の周期性が「deck transformation によるずれは定数であり、その定数は
-閉 \(1\)-形式 \(\omega\) の period に等しい」という事実から従うことを示している。
-\end{remark}
-
 \section*{付録：本稿で用いた被覆空間に関する事実}
 
 この節では、\(T^2=\R^2/\Z^2\) の de Rham コホモロジーの計算で用いた
@@ -1138,7 +947,162 @@ d(g\circ\tau_{m,n}-g)
 この定数は \(\omega\) の period と解釈できる。
 したがって、基本ループに沿う period がすべて \(0\) なら、
 \(g\) は \(\Z^2\)-不変、すなわち \(T^2\) 上の関数に降りる。
-これは \(H^1_{\mathrm{dR}}(T^2)\) の計算における \(\Phi\) の単射性の別証明を与える。
+本文の \(H^1_{\mathrm{dR}}(T^2)\) の計算では、この事実を用いて
+\(\Phi\) の単射性を示した。
 \end{remark}
+
+\section*{付録：\(\Phi\) の単射性の座標計算}
+
+本文では deck transformation を用いて \(\Phi\) の単射性を示した。
+ここでは同じ点、すなわち \(dg=\pi^*\omega\) を満たす原始関数 \(g\) の
+\(\Z^2\)-周期性を、座標計算で直接確認する。
+
+\begin{prop}
+\(\Phi\) は単射である。
+\end{prop}
+
+\begin{proof}
+\(\Phi([\omega])=(0,0)\) と仮定する。
+\(\omega\in\Omega^1(T^2)\) は閉であるとする。
+
+\(\pi^*\omega\in \Omega^1(\R^2)\) は \(\Z^2\)-不変な $1$-形式であり、
+ある滑らかな周期関数 \(A,B\in C^\infty(\R^2)\) を用いて
+\[
+\pi^*\omega=A(x,y)\,dx+B(x,y)\,dy
+\tag{C1}
+\]
+と書ける。
+
+\(\omega\) が閉であるから
+\[
+0=\pi^*(d\omega)=d(\pi^*\omega).
+\]
+よって \((C1)\) を微分して
+\[
+\frac{\partial A}{\partial y}=\frac{\partial B}{\partial x}
+\tag{C2}
+\]
+を得る。
+
+\(\R^2\) は可縮であるから、Poincar\'e の補題より \(\pi^*\omega\) は exact である。
+したがって、ある \(g\in C^\infty(\R^2)\) が存在して
+\[
+dg=\pi^*\omega
+\tag{C3}
+\]
+を満たす。
+
+まず
+\[
+I(y):=\int_0^1 A(x,y)\,dx
+\]
+とおく。
+すると \((C2)\) より
+\[
+I'(y)
+=
+\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dx
+=
+\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dx
+=
+B(1,y)-B(0,y)=0
+\]
+である。最後は \(B\) の \(1\)-periodicity を用いた。
+したがって \(I(y)\) は定数である。
+
+一方、\(\int_{\gamma_x}\omega=0\) と仮定しているので、\((2)\) と \((C1)\) を用いて
+\[
+0=\int_{\gamma_x}\omega
+=\int_0^1 \widetilde{\gamma}_x^{\,*}(\pi^*\omega)
+=\int_0^1 A(t,0)\,dt
+=I(0).
+\]
+よって
+\[
+I(y)=0\qquad (\forall y).
+\tag{C4}
+\]
+
+\((C3)\) より \(\partial g/\partial x=A\) であるから
+\[
+g(x+1,y)-g(x,y)
+=
+\int_x^{x+1} A(s,y)\,ds.
+\]
+\(A\) は \(1\)-periodic なので
+\[
+\int_x^{x+1} A(s,y)\,ds
+=
+\int_0^1 A(s,y)\,ds
+=
+I(y)=0.
+\]
+ゆえに
+\[
+g(x+1,y)=g(x,y).
+\tag{C5}
+\]
+
+\medskip
+
+同様に
+\[
+J(x):=\int_0^1 B(x,y)\,dy
+\]
+とおくと、\((C2)\) より
+\[
+J'(x)
+=
+\int_0^1 \frac{\partial B}{\partial x}(x,y)\,dy
+=
+\int_0^1 \frac{\partial A}{\partial y}(x,y)\,dy
+=
+A(x,1)-A(x,0)=0.
+\]
+したがって \(J(x)\) は定数である。
+
+また \(\int_{\gamma_y}\omega=0\) だから
+\[
+0=\int_{\gamma_y}\omega
+=\int_0^1 \widetilde{\gamma}_y^{\,*}(\pi^*\omega)
+=\int_0^1 B(0,t)\,dt
+=J(0).
+\]
+よって
+\[
+J(x)=0\qquad (\forall x).
+\tag{C6}
+\]
+
+\((C3)\) より \(\partial g/\partial y=B\) であるから
+\[
+g(x,y+1)-g(x,y)
+=
+\int_y^{y+1} B(x,t)\,dt
+=
+\int_0^1 B(x,t)\,dt
+=
+J(x)=0.
+\]
+ゆえに
+\[
+g(x,y+1)=g(x,y).
+\tag{C7}
+\]
+
+\((C5),(C7)\) より \(g\) は \(\Z^2\)-周期的である。
+したがって、ある \(f\in C^\infty(T^2)\) が存在して
+\[
+\pi^*f=g
+\]
+を満たす。
+
+すると
+\[
+\pi^*(df)=d(\pi^*f)=dg=\pi^*\omega.
+\]
+\(\pi^*\) の単射性より \(df=\omega\) である。
+したがって \(\omega\) は exact であり、\(\ker\Phi=0\) が従う。
+\end{proof}
 
 \end{document}
